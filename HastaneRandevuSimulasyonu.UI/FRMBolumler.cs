@@ -48,6 +48,7 @@ namespace HastaneRandevuSimulasyonu.UI
         {
             var bolumler = _db.Bolumler.ToList();
             dgvBolumler.DataSource = bolumler;
+            
         }
 
         private void BolumBilgileriniTemizle()
@@ -78,7 +79,7 @@ namespace HastaneRandevuSimulasyonu.UI
 
             secilenBolum = null;
 
-            MessageBox.Show("Bölüm silme işlemi başarıyla gerçekleşti");
+            MessageBox.Show("Bölüm silme işlemi başarıyla gerçekleşti.");
             BolumleriListele();
             BolumBilgileriniTemizle();
 
@@ -99,11 +100,16 @@ namespace HastaneRandevuSimulasyonu.UI
 
             secilenBolum = null;
 
-            MessageBox.Show("Bölüm güncelleme işlemi başarıyla gerçekleşti!");
+            MessageBox.Show("Bölüm güncelleme işlemi başarıyla gerçekleşti.");
             BolumleriListele();
             BolumBilgileriniTemizle();
         }
 
-
+        private void btnGec_Click(object sender, EventArgs e)
+        {
+            FRMDoktorlar fRMDoktorlar = new FRMDoktorlar();
+            fRMDoktorlar.ShowDialog();
+            this.Hide();
+        }
     }
 }

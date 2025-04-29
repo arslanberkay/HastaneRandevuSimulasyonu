@@ -13,5 +13,10 @@ namespace HastaneRandevuSimulasyonu.UI.Models
         public string Aciklamasi { get; set; }
 
         public List<Doktor> Doktorlar { get; set; }
+
+        public override string ToString()
+        {
+            return Adi;
+        }
     }
 }

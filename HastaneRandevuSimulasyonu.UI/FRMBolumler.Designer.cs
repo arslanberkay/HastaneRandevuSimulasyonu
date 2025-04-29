@@ -67,7 +67,7 @@
             txtBolumAdi.Location = new Point(118, 39);
             txtBolumAdi.Name = "txtBolumAdi";
             txtBolumAdi.Size = new Size(270, 31);
-            txtBolumAdi.TabIndex = 2;
+            txtBolumAdi.TabIndex = 0;
             // 
             // txtBolumAciklamasi
             // 
@@ -75,14 +75,14 @@
             txtBolumAciklamasi.Multiline = true;
             txtBolumAciklamasi.Name = "txtBolumAciklamasi";
             txtBolumAciklamasi.Size = new Size(270, 91);
-            txtBolumAciklamasi.TabIndex = 3;
+            txtBolumAciklamasi.TabIndex = 1;
             // 
             // btnBolumEkle
             // 
             btnBolumEkle.Location = new Point(66, 229);
             btnBolumEkle.Name = "btnBolumEkle";
             btnBolumEkle.Size = new Size(110, 43);
-            btnBolumEkle.TabIndex = 2;
+            btnBolumEkle.TabIndex = 1;
             btnBolumEkle.Text = "Ekle";
             btnBolumEkle.UseVisualStyleBackColor = true;
             btnBolumEkle.Click += btnBolumEkle_Click;
@@ -92,7 +92,7 @@
             btnBolumSil.Location = new Point(196, 229);
             btnBolumSil.Name = "btnBolumSil";
             btnBolumSil.Size = new Size(110, 43);
-            btnBolumSil.TabIndex = 3;
+            btnBolumSil.TabIndex = 2;
             btnBolumSil.Text = "Sil";
             btnBolumSil.UseVisualStyleBackColor = true;
             btnBolumSil.Click += btnBolumSil_Click;
@@ -102,7 +102,7 @@
             btnBolumGuncelle.Location = new Point(336, 229);
             btnBolumGuncelle.Name = "btnBolumGuncelle";
             btnBolumGuncelle.Size = new Size(110, 43);
-            btnBolumGuncelle.TabIndex = 4;
+            btnBolumGuncelle.TabIndex = 3;
             btnBolumGuncelle.Text = "Güncelle";
             btnBolumGuncelle.UseVisualStyleBackColor = true;
             btnBolumGuncelle.Click += btnBolumGuncelle_Click;
@@ -136,9 +136,10 @@
             btnGec.Location = new Point(349, 571);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(110, 43);
-            btnGec.TabIndex = 5;
+            btnGec.TabIndex = 4;
             btnGec.Text = "Geç";
             btnGec.UseVisualStyleBackColor = true;
+            btnGec.Click += btnGec_Click;
             // 
             // FRMBolumler
             // 
