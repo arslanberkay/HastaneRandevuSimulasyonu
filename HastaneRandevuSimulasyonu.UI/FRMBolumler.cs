@@ -20,7 +20,15 @@ namespace HastaneRandevuSimulasyonu.UI
         {
             InitializeComponent();
 
+            DataGridViewAyarla();
+
             BolumleriListele();
+        }
+
+        private void DataGridViewAyarla()
+        {
+            dgvBolumler.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvBolumler.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
         private void btnBolumEkle_Click(object sender, EventArgs e)
@@ -46,7 +54,8 @@ namespace HastaneRandevuSimulasyonu.UI
 
         private void BolumleriListele()
         {
-            var bolumler = _db.Bolumler.ToList();
+            //var bolumler = _db.Bolumler.ToList();
+            var bolumler = _db.Bolumler.Select(b => new { b.Adi, b.Aciklamasi }).ToList();
             dgvBolumler.DataSource = bolumler;
             
         }

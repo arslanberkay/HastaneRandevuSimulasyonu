@@ -17,5 +17,10 @@ namespace HastaneRandevuSimulasyonu.UI.Models
         public Bolum Bolum { get; set; }
 
         public List<Randevu> Randevular { get; set; }
+
+        public override string ToString()
+        {
+            return Ad + " " + Soyad; 
+        }
     }
 }

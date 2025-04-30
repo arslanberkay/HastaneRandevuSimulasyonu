@@ -11,8 +11,13 @@ namespace HastaneRandevuSimulasyonu.UI.Models
         public int Id { get; set; }
         public string Ad { get; set; }
         public string Soyad { get; set; }
-        public DateTime DogumTarihi { get; set; }
+        public string Sikayet { get; set; }
 
         public List<Randevu> Randevular { get; set; }
+
+        public override string ToString()
+        {
+            return Ad + " " + Soyad;
+        }
     }
 }

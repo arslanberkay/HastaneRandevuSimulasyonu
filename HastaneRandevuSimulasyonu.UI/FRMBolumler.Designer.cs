@@ -114,7 +114,7 @@
             dgvBolumler.Name = "dgvBolumler";
             dgvBolumler.RowHeadersWidth = 51;
             dgvBolumler.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvBolumler.Size = new Size(416, 269);
+            dgvBolumler.Size = new Size(878, 269);
             dgvBolumler.TabIndex = 3;
             dgvBolumler.CellClick += dgvBolumler_CellClick;
             // 
@@ -133,7 +133,7 @@
             // 
             // btnGec
             // 
-            btnGec.Location = new Point(349, 571);
+            btnGec.Location = new Point(811, 564);
             btnGec.Name = "btnGec";
             btnGec.Size = new Size(110, 43);
             btnGec.TabIndex = 4;
@@ -145,7 +145,7 @@
             // 
             AutoScaleDimensions = new SizeF(10F, 25F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(515, 639);
+            ClientSize = new Size(959, 639);
             Controls.Add(groupBox1);
             Controls.Add(dgvBolumler);
             Controls.Add(btnGec);

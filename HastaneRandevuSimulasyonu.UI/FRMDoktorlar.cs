@@ -20,6 +20,8 @@ namespace HastaneRandevuSimulasyonu.UI
         {
             InitializeComponent();
 
+            DataGridViewAyarla();
+
             DoktorListele();
             BolumListele();
         }
@@ -117,6 +119,19 @@ namespace HastaneRandevuSimulasyonu.UI
             MessageBox.Show("Doktor güncelleme işlemi başarıyla gerçekleşti");
             DoktorListele();
             DoktorBilgileriTemizle();
+        }
+
+        private void DataGridViewAyarla()
+        {
+            dgvDoktorlar.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.AllCells;
+            dgvDoktorlar.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
+        }
+
+        private void btnGec_Click(object sender, EventArgs e)
+        {
+            FRMRandevular fRMRandevular = new FRMRandevular();
+            fRMRandevular.Show();
+            this.Hide();
         }
     }
 }

@@ -161,6 +161,7 @@
             btnGec.TabIndex = 4;
             btnGec.Text = "Geç";
             btnGec.UseVisualStyleBackColor = true;
+            btnGec.Click += btnGec_Click;
             // 
             // dgvDoktorlar
             // 
