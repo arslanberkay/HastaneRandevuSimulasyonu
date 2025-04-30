@@ -1,5 +1,6 @@
 ﻿using HastaneRandevuSimulasyonu.UI.Context;
 using HastaneRandevuSimulasyonu.UI.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -39,6 +40,7 @@ namespace HastaneRandevuSimulasyonu.UI
             doktor.Soyad = txtDoktorSoyad.Text;
             doktor.Telefon = mtxtDoktorTelefon.Text;
             doktor.BolumId = (cbBolum.SelectedItem as Bolum).Id;
+            //doktor.BolumId = (int)cbBolum.SelectedValue;
 
             _db.Doktorlar.Add(doktor);
             _db.SaveChanges();
@@ -51,18 +53,25 @@ namespace HastaneRandevuSimulasyonu.UI
 
         private void DoktorListele()
         {
-            var doktorlar = _db.Doktorlar.ToList();
+            var doktorlar = _db.Doktorlar.Include(d => d.Bolum).Select(d => new { d.Id, d.Ad, d.Soyad, d.Telefon, BolumAdi = d.Bolum.Adi }).ToList();
+            //var doktorlar = _db.Doktorlar.ToList() ;
             dgvDoktorlar.DataSource = doktorlar;
         }
 
         private void BolumListele()
         {
-            var bolumler = _db.Bolumler.ToList();
-            //cbBolum.DataSource = bolumler;
+
+            var bolumler = _db.Bolumler.Select(b => new { b.Id, b.Adi }).ToList();
             foreach (var bolum in bolumler)
             {
                 cbBolum.Items.Add(bolum);
             }
+
+            //var bolumler = _db.Bolumler.ToList();
+            cbBolum.DisplayMember = "Adi"; //Combobox'ta kullanıcının göreceği metin için "Adi" alanını kullan
+            cbBolum.ValueMember = "Id"; //Combobox'ın arka planda tutacağı seçili değeri belirler.
+
+            //cbBolum.DataSource = bolumler;
         }
 
         private void DoktorBilgileriTemizle()
@@ -75,7 +84,8 @@ namespace HastaneRandevuSimulasyonu.UI
 
         private void dgvDoktorlar_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            secilenDoktor = dgvDoktorlar.SelectedRows[0].DataBoundItem as Doktor;
+            int secilenDoktorId = (int)dgvDoktorlar.SelectedRows[0].Cells["Id"].Value;
+            secilenDoktor = _db.Doktorlar.FirstOrDefault(d => d.Id == secilenDoktorId);
 
             txtDoktorAd.Text = secilenDoktor.Ad;
             txtDoktorSoyad.Text = secilenDoktor.Soyad;
@@ -90,6 +100,9 @@ namespace HastaneRandevuSimulasyonu.UI
                 MessageBox.Show("Lütfen silmek istediğiniz doktoru seçiniz!");
                 return;
             }
+
+            //var seciliDoktorId = (int)(dgvDoktorlar.SelectedRows[0].Cells["Id"].Value);
+            //var seciliDoktor = _db.Doktorlar.FirstOrDefault(d => d.Id == seciliDoktorId);
 
             _db.Doktorlar.Remove(secilenDoktor);
             _db.SaveChanges();

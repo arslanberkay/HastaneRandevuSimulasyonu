@@ -15,11 +15,12 @@ namespace HastaneRandevuSimulasyonu.UI
 {
     public partial class FRMRandevular : Form
     {
-        HastaneRandevuDb _db = new HastaneRandevuDb();
+        private readonly HastaneRandevuDb _db;
 
         public FRMRandevular()
         {
             InitializeComponent();
+            _db = new HastaneRandevuDb();
 
             DataGridViewAyarla();
 
@@ -59,7 +60,7 @@ namespace HastaneRandevuSimulasyonu.UI
             randevu.Hasta = hasta;
             randevu.Doktor = cbDoktorlar.SelectedItem as Doktor;
 
-           
+
             _db.Randevular.Add(randevu);
             _db.SaveChanges();
 
@@ -72,8 +73,22 @@ namespace HastaneRandevuSimulasyonu.UI
 
         private void RandevuListele()
         {
-            var randevular = _db.Randevular.Include(r=>r.Doktor).Include(r=>r.Hasta).ToList();
+            //var randevular = _db.Randevular.Include(r => r.Doktor).Include(r => r.Hasta).ToList();
+            var randevular = _db.Randevular
+                .Include(r => r.Hasta)
+                .Include(r => r.Doktor)
+                .ThenInclude(d => d.Bolum)
+                .Select(r => new { HastaAdSoyad = r.Hasta.Ad + " " + r.Hasta.Soyad, r.Tarih, DoktorAd = r.Doktor.Ad, DoktorSoyad = r.Doktor.Soyad, BolumAdi = r.Doktor.Bolum.Adi }).ToList();
             dgvRandevular.DataSource = randevular;
+
+            DataGridViewBasliklariDuzenle();
+        }
+
+        private void DataGridViewBasliklariDuzenle()
+        {
+            dgvRandevular.Columns["HastaAdSoyad"].HeaderText = "Hasta Adı Soyadı";
+            dgvRandevular.Columns["DoktorAd"].HeaderText = "Doktor Ad";
+            dgvRandevular.Columns["BolumAdi"].HeaderText = "Bölüm Ad";
         }
 
         private void RandevuBilgileriTemizle()

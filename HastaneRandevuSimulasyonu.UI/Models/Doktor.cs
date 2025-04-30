@@ -20,7 +20,7 @@ namespace HastaneRandevuSimulasyonu.UI.Models
 
         public override string ToString()
         {
-            return Ad + " " + Soyad; 
+            return Ad + " " + Soyad;
         }
     }
 }

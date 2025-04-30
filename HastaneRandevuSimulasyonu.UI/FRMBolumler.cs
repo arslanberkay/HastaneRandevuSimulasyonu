@@ -14,11 +14,14 @@ namespace HastaneRandevuSimulasyonu.UI
 {
     public partial class FRMBolumler : Form
     {
-        HastaneRandevuDb _db = new HastaneRandevuDb();
+        //HastaneRandevuDb _db = new HastaneRandevuDb();
+
+       private readonly HastaneRandevuDb _db; //readonly anahtar kelimesi sayesinde _db değiştirilemez, bu da immutability sağlar.
 
         public FRMBolumler()
         {
             InitializeComponent();
+            _db = new HastaneRandevuDb();
 
             DataGridViewAyarla();
 
@@ -31,11 +34,31 @@ namespace HastaneRandevuSimulasyonu.UI
             dgvBolumler.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.AllCells;
         }
 
+        private bool ValidateInputs()
+        {
+            if (string.IsNullOrWhiteSpace(txtBolumAdi.Text))
+            {
+                MessageBox.Show("Bölüm adı boş olamaz!");
+                return false;
+            }
+            if (string.IsNullOrWhiteSpace(txtBolumAciklamasi.Text))
+            {
+                MessageBox.Show("Bölüm açıklaması boş olamaz!");
+                return false;
+            }
+            return true;
+        }
+
         private void btnBolumEkle_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrWhiteSpace(txtBolumAdi.Text) || string.IsNullOrWhiteSpace(txtBolumAciklamasi.Text))
+            //if (string.IsNullOrWhiteSpace(txtBolumAdi.Text) || string.IsNullOrWhiteSpace(txtBolumAciklamasi.Text))
+            //{
+            //    MessageBox.Show("Lütfen bölüm bilgilerini eksiksiz doldurun!");
+            //    return;
+            //}
+
+            if (!ValidateInputs())
             {
-                MessageBox.Show("Lütfen bölüm bilgilerini eksiksiz doldurun!");
                 return;
             }
 
@@ -54,8 +77,8 @@ namespace HastaneRandevuSimulasyonu.UI
 
         private void BolumleriListele()
         {
-            //var bolumler = _db.Bolumler.ToList();
-            var bolumler = _db.Bolumler.Select(b => new { b.Adi, b.Aciklamasi }).ToList();
+            var bolumler = _db.Bolumler.ToList();
+            //var bolumler = _db.Bolumler.Select(b => new { b.Adi, b.Aciklamasi }).ToList();
             dgvBolumler.DataSource = bolumler;
             
         }
